@@ -38,7 +38,10 @@ namespace pf {
                 continue;
             }
 
-            maze.map[z][y] = strdup(line.c_str());
+            maze.map[z][y] = new char[maze.width];
+            for (int x = 0; x < maze.width; x++) {
+                maze.map[z][y][x] = line[x];
+            }
             y++;
         }
 
@@ -48,7 +51,7 @@ namespace pf {
     void freeMaze(Maze& maze) {
         for (int i = 0; i < maze.depth; i++) {
             for (int j = 0; j < maze.height; j++) {
-                free(maze.map[i][j]);
+                delete[] maze.map[i][j];
             }
             delete[] maze.map[i];
         }

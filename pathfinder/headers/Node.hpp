@@ -28,10 +28,6 @@ struct Vec3i {
         return approximation;
     }
 
-    Vec3i operator-(const Vec3i& other) const {
-        return Vec3i(x - other.x, y - other.y, z - other.z);
-    }
-
     Vec3i operator=(const Vec3i& other) {
         x = other.x;
         y = other.y;

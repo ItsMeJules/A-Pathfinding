@@ -1,16 +1,6 @@
 #include "AStarPathFinder.hpp"
-#include <ostream>
 
 namespace pf {
-
-    int approximateDiscoveredCells(const Vec3i& start, const Vec3i& end) {
-        int xDistance = abs(start.x - end.x) + 1;
-        int yDistance = abs(start.y - end.y) + 1;
-        int zDistance = abs(start.z - end.z) + 1;
-
-        return xDistance * yDistance * zDistance;
-    }
-
     std::vector<Vec3i*> reconstructPath(Node* node) {
         std::vector<Vec3i*> path;
         Node* currentNode = node;
@@ -73,15 +63,13 @@ namespace pf {
         Node *endNode = new Node(end);
         Node *currentNode = nullptr;
 
-        int possibleNodesAmount = approximateDiscoveredCells(start, end);
         std::vector<Node*> nodesToCheck;
         std::vector<Node*> checkedNodes;
 
-        checkedNodes.reserve(possibleNodesAmount);
-        nodesToCheck.reserve(possibleNodesAmount);
         nodesToCheck.push_back(startNode);
 
         while (!nodesToCheck.empty()) {
+            // this can need some optimization, like btree or something
             auto current_it = std::min_element(nodesToCheck.begin(), nodesToCheck.end(),
                 [](const Node* a, const Node* b) {
                     return a->isMorePromisingThan(*b);

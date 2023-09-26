@@ -4,7 +4,7 @@ NAME		=	maze
 
 #	Compilation
 CXX			=	c++
-CXXFLAG		=	-Wall -Werror -Wextra -fsanitize=address -g
+CXXFLAG		=	-Wall -Werror -Wextra -O3
 RM			=	rm -rf
 SRC_DIR 	= 	srcs/
 
